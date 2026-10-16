@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80">
+  <!-- Group for the Icon, centered -->
+  <g transform="translate(60, 5) scale(0.7)">
+    <!-- Red C Shape (Left) -->
+    <path d="M 45 45 C 20 45, 10 25, 30 15 C 40 10, 55 10, 65 15 L 65 30 C 60 25, 50 25, 45 28 C 35 32, 40 40, 55 40 Z" fill="#DA251D"/>
+    
+    <!-- Black S Shape (Right) - overlapping to form loop/infinity feel -->
+    <path d="M 85 15 C 110 15, 120 35, 100 45 C 90 50, 75 50, 65 45 L 65 30 C 70 35, 80 35, 85 32 C 95 28, 90 20, 75 20 Z" fill="#1a1a1a"/>
+    
+    <!-- Connecting middle stroke to simulate the infinity overlap better if needed, 
+         or just rely on the two shapes. Let's make them thicker arcs. -->
+         
+    <!-- Re-drawing as thick strokes for better 'CS' logo shape -->
+    <!-- Red C-like arc -->
+    <path d="M 70 20 A 20 20 0 1 0 50 50 L 90 50 L 90 35 L 50 35 A 8 8 0 1 1 50 20 H 70 Z" fill="#DA251D" transform="translate(-10, 0)"/>
+    
+    <!-- Black S-like arc (inverted C logic) -->
+    <path d="M 60 40 H 100 A 20 20 0 1 0 100 10 L 100 25 A 8 8 0 1 1 100 40 Z" fill="#1a1a1a" transform="translate(0, 10)"/>
+
+    <!-- Black Dot -->
+    <circle cx="65" cy="5" r="9" fill="#1a1a1a"/>
+  </g>
+
+  <!-- Text: SPINDO -->
+  <text x="110" y="62" font-family="Arial, sans-serif" font-weight="900" font-size="28" fill="#1a1a1a" letter-spacing="3" text-anchor="middle">SPINDO</text>
+  
+  <!-- Red Underline -->
+  <rect x="35" y="68" width="150" height="4" fill="#DA251D"/>
+</svg>

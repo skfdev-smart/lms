@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Page Transition: Door Opening Effect ===== */
+.door-transition-wrapper {
+    perspective: 2000px;
+    perspective-origin: center center;
+    overflow: hidden;
+}
+
+/* Door Open Left (exit) */
+.door-open-left-leave-active {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+    transform-origin: left center;
+}
+.door-open-left-leave-to {
+    transform: rotateY(-90deg);
+    opacity: 0;
+}
+
+/* Door Open Right (enter) */
+.door-open-right-enter-active {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+    transform-origin: right center;
+}
+.door-open-right-enter-from {
+    transform: rotateY(90deg);
+    opacity: 0;
+}
+.door-open-right-enter-to {
+    transform: rotateY(0deg);
+    opacity: 1;
+}
+
+/* Slide Door Effect */
+.slide-door-enter-active,
+.slide-door-leave-active {
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.slide-door-enter-from {
+    transform: translateX(100%) rotateY(-15deg);
+    opacity: 0;
+}
+.slide-door-leave-to {
+    transform: translateX(-100%) rotateY(15deg);
+    opacity: 0;
+}
+
+/* Flip Page Effect */
+.flip-page-enter-active,
+.flip-page-leave-active {
+    transition: all 0.5s ease-in-out;
+    backface-visibility: hidden;
+}
+.flip-page-enter-from {
+    transform: rotateY(-180deg) scale(0.9);
+    opacity: 0;
+}
+.flip-page-leave-to {
+    transform: rotateY(180deg) scale(0.9);
+    opacity: 0;
+}
+
+/* Smooth Fade Slide */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+    transition: all 0.4s ease;
+}
+.fade-slide-enter-from {
+    opacity: 0;
+    transform: translateY(20px);
+}
+.fade-slide-leave-to {
+    opacity: 0;
+    transform: translateY(-20px);
+}
