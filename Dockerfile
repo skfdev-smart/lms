@@ -1,19 +1,9 @@
 # ==========================================
-# Multi-Stage Production Dockerfile for SMART-LMS
+# Production Dockerfile for SMART-LMS
 # Target: VPS Ubuntu 24.04 with Coolify PaaS
 # Domain: https://smart-lms.spindo.my.id
 # ==========================================
 
-# STAGE 1: Frontend Asset Builder (Node.js)
-FROM node:20-alpine AS node_builder
-ENV NODE_ENV=development
-WORKDIR /app
-COPY package*.json ./
-RUN npm install --include=dev --legacy-peer-deps
-COPY . .
-RUN npm run build
-
-# STAGE 2: PHP Application Runtime
 FROM php:8.4-fpm-alpine AS base
 
 # Install System Dependencies & Database Libraries
@@ -60,11 +50,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy application files
+# Copy application files (including pre-compiled public/build assets)
 COPY . .
-
-# Copy pre-compiled frontend assets from node_builder
-COPY --from=node_builder /app/public/build ./public/build
 
 # Install PHP dependencies without dev packages
 RUN composer install --no-dev --optimize-autoloader --no-interaction
