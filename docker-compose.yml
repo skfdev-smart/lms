@@ -1,0 +1,58 @@
+# ========================================================
+# SMART-LMS Docker Compose Configuration for Coolify
+# Target OS: Ubuntu 24.04 LTS with PostgreSQL 16
+# Production FQDN: https://smart-lms.spindo.my.id
+# ========================================================
+
+services:
+  # Main Laravel Web & Vue/Inertia Application
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "80"
+    environment:
+      APP_NAME: "SMART-LMS"
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: "${APP_URL:-https://smart-lms.spindo.my.id}"
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: "${DB_DATABASE:-lms_db}"
+      DB_USERNAME: "${DB_USERNAME:-lms_user}"
+      DB_PASSWORD: "${DB_PASSWORD:-spindo_lms_secret_2026}"
+      SESSION_DRIVER: database
+      CACHE_STORE: database
+      QUEUE_CONNECTION: database
+    depends_on:
+      - db
+    volumes:
+      - storage_data:/var/www/html/storage/app/public
+    networks:
+      - lms_net
+
+  # PostgreSQL 16 Database
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${DB_DATABASE:-lms_db}"
+      POSTGRES_USER: "${DB_USERNAME:-lms_user}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD:-spindo_lms_secret_2026}"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - lms_net
+
+volumes:
+  storage_data:
+    driver: local
+  pg_data:
+    driver: local
+
+networks:
+  lms_net:
+    driver: bridge
