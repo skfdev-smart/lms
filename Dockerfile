@@ -6,9 +6,10 @@
 
 # STAGE 1: Frontend Asset Builder (Node.js)
 FROM node:20-alpine AS node_builder
+ENV NODE_ENV=development
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install --include=dev --legacy-peer-deps
 COPY . .
 RUN npm run build
 
