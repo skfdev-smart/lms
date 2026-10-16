@@ -18,6 +18,7 @@ class ResetAdminSeeder extends Seeder
             $user->name = 'Admin';
         }
 
+        $user->role = 'admin';
         $user->password = Hash::make('password');
         $user->email_verified_at = now();
         $user->save();
